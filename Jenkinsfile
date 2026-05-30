@@ -21,5 +21,12 @@ pipeline {
                 sh '$HOME/.local/bin/uv run pytest'
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t cicd-python-demo:${BUILD_NUMBER} .'
+                sh 'docker images | grep cicd-python-demo'
+            }
+        }
     }
 }
