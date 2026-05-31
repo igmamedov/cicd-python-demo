@@ -50,8 +50,8 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh 'kubectl apply -f k8s/'
-                sh 'kubectl set image deployment/cicd-python-demo cicd-python-demo=${IMAGE_NAME}:${BUILD_NUMBER}'
-                sh 'kubectl rollout status deployment/cicd-python-demo'
+                sh 'kubectl set image deployment/cicd-python-demo cicd-python-demo=${IMAGE_NAME}:${BUILD_NUMBER} -n dev'
+                sh 'kubectl rollout status deployment/cicd-python-demo -n dev'
             }
         }
     }
