@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: cicd-python-demo-config
 data:
-  INFO_TEXT: "Hello from Kubernetes ConfigMap"
+  INFO_TEXT: "Hello from Kubernetes ConfigMap 2.0"
