@@ -20,5 +20,5 @@ def version():
 @app.get("/info")
 def info():
     return {
-        "text": "llm not available"
+        "text": "llm available"
     }
