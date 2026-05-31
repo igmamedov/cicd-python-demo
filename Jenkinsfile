@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'ilgarmamedov/cicd-python-demo'
+        IMAGE_NAME = 'ilgar27/cicd-python-demo'
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh 'python3 -m venv .venv'
                 sh '. .venv/bin/activate && pip install --upgrade pip'
-                sh '. .venv/bin/activate && pip install -r requirements.txt'
+                sh '. .venv/bin/activate && pip install -r requirements-dev.txt'
             }
         }
 
@@ -44,6 +44,14 @@ pipeline {
                     sh 'docker push ${IMAGE_NAME}:${BUILD_NUMBER}'
                     sh 'docker push ${IMAGE_NAME}:latest'
                 }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh 'kubectl apply -f k8s/'
+                sh 'kubectl set image deployment/cicd-python-demo cicd-python-demo=${IMAGE_NAME}:${BUILD_NUMBER}'
+                sh 'kubectl rollout status deployment/cicd-python-demo'
             }
         }
     }
