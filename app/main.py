@@ -16,3 +16,9 @@ def health():
 @app.get("/version")
 def version():
     return {"version": "1.0.0"}
+
+@app.get("/info")
+def info():
+    return {
+        "text": "llm not available"
+    }
