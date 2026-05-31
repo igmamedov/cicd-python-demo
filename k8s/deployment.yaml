@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-python-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cicd-python-demo
+  template:
+    metadata:
+      labels:
+        app: cicd-python-demo
+    spec:
+      containers:
+        - name: cicd-python-demo
+          image: ilgar27/cicd-python-demo:latest
+          ports:
+            - containerPort: 8000
