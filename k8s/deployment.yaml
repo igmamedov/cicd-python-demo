@@ -17,3 +17,6 @@ spec:
           image: ilgar27/cicd-python-demo:latest
           ports:
             - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: cicd-python-demo-config

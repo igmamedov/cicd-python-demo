@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import os
 
 app = FastAPI()
 
@@ -20,5 +21,5 @@ def version():
 @app.get("/info")
 def info():
     return {
-        "text": "llm available"
+        "text": os.getenv("INFO_TEXT", "default info text")
     }
