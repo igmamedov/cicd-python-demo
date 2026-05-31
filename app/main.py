@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 import os
+import socket
 
 app = FastAPI()
 
@@ -22,4 +23,10 @@ def version():
 def info():
     return {
         "text": os.getenv("INFO_TEXT", "default info text")
+    }
+
+@app.get("/pod")
+def pod():
+    return {
+        "pod": socket.gethostname()
     }
